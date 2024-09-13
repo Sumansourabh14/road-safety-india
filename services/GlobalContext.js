@@ -26,13 +26,13 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
-  const uploadVideo = async (body, videoUrl) => {
+  const uploadVideo = async (body, videoUrl, location) => {
     try {
       const res = await databases.createDocument(
         process.env.NEXT_PUBLIC_DATABASE_ID,
         process.env.NEXT_PUBLIC_VIDEOS_COLLECTION_ID,
         ID.unique(),
-        { text: body, videoUrl: videoUrl }
+        { text: body, videoUrl, location }
       );
 
       return res;

@@ -1,79 +1,100 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { GlobalContext } from "@/services/GlobalContext";
-import { ID, Storage } from "appwrite";
+import { uploadVideoToBackend } from "@/utils/backendFunctions";
 import { useContext, useEffect, useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
-import { client } from "../appwrite";
 
 const Upload = () => {
   const [body, setBody] = useState("");
   const [file, setFile] = useState("");
+  const [location, setLocation] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
+  const [videoSrc, setVideoSrc] = useState("");
 
   const { uploadVideo } = useContext(GlobalContext);
 
   const handleFileChange = (file) => {
-    console.log(file);
+    const url = URL.createObjectURL(file);
+    setVideoSrc(url);
     setFile(file);
-  };
-
-  const uploadVideoToAppwrite = async () => {
-    const storage = new Storage(client);
-
-    const res = await storage.createFile(
-      process.env.NEXT_PUBLIC_VIDEOS_BUCKET_ID,
-      ID.unique(),
-      file
-    );
-
-    console.log(res);
-
-    if (!!res) {
-      const result = storage.getFileDownload(
-        process.env.NEXT_PUBLIC_VIDEOS_BUCKET_ID,
-        res.$id
-      );
-      console.log(result.href);
-      setVideoUrl(result.href);
-    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    uploadVideo(body, videoUrl);
+    uploadVideo(body, videoUrl, location);
+  };
+
+  const uploadVideoToAppwrite = async () => {
+    const url = await uploadVideoToBackend(file);
+    setVideoUrl(url);
   };
 
   useEffect(() => {
     if (!file) {
       return;
     }
+
     uploadVideoToAppwrite();
   }, [file]);
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 items-center sm:items-start">
-        <h1 className="text-6xl">Upload Video</h1>
-        <div>
-          <div className="flex w-full max-w-sm items-center space-x-2">
-            <form onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                placeholder="Body"
-                value={body}
-                onChange={(e) => setBody(e.target.value)}
-              />
+    <div className="p-32 font-[family-name:var(--font-geist-sans)]">
+      <main>
+        <h1 className="text-5xl text-center font-bold">Upload Video</h1>
+        <div className="my-8 px-8">
+          <form onSubmit={handleSubmit}>
+            <div className="flex flex-col gap-4 max-w-[600px] items-center mx-auto">
+              <div>
+                <Textarea
+                  placeholder="Type your body here"
+                  value={body}
+                  onChange={(e) => setBody(e.target.value)}
+                  required
+                />
+                <p className="text-sm text-muted-foreground mt-1">
+                  This will be used for additional context or any crucial
+                  information, basically anything that describes the activity
+                  happening in the video.
+                </p>
+              </div>
               <FileUploader
                 handleChange={handleFileChange}
                 value={file}
                 types={["mp4"]}
+              >
+                <div className="w-full max-w-md p-6 border-2 border-dashed rounded-lg transition-colors border-gray-300">
+                  {!videoSrc ? (
+                    <div className="text-center text-gray-500">
+                      <p className="text-md">
+                        Drop or upload a video file here
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center">
+                      <video
+                        className="w-full h-auto mt-4 rounded-lg"
+                        controls
+                        src={videoSrc}
+                      />
+                    </div>
+                  )}
+                </div>
+              </FileUploader>
+              <Input
+                type="text"
+                placeholder="Location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
               />
-              <Button type="submit">Submit</Button>
-            </form>
-          </div>
+              <Button type="submit" disabled={!videoSrc || body.length === 0}>
+                Submit
+              </Button>
+            </div>
+          </form>
         </div>
       </main>
     </div>
