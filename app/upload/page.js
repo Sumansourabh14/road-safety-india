@@ -45,9 +45,9 @@ const Upload = () => {
     <div className="p-32 font-[family-name:var(--font-geist-sans)]">
       <main>
         <h1 className="text-5xl text-center font-bold">Upload Video</h1>
-        <div className="my-8 px-8">
+        <div className="my-4 px-8">
           <form onSubmit={handleSubmit}>
-            <div className="flex flex-col gap-4 max-w-[600px] items-center mx-auto">
+            <div className="flex flex-col gap-8 max-w-[680px] items-center mx-auto">
               <div>
                 <Textarea
                   placeholder="Type your body here"
@@ -66,7 +66,7 @@ const Upload = () => {
                 value={file}
                 types={["mp4"]}
               >
-                <div className="w-full max-w-md p-6 border-2 border-dashed rounded-lg transition-colors border-gray-300">
+                <div className="w-full max-w-lg p-6 border-2 border-dashed rounded-lg transition-colors border-gray-300">
                   {!videoSrc ? (
                     <div className="text-center text-gray-500">
                       <p className="text-md">
@@ -86,7 +86,7 @@ const Upload = () => {
               </FileUploader>
               <Input
                 type="text"
-                placeholder="Location"
+                placeholder="Location in the video"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
               />
