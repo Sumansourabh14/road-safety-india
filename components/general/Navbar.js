@@ -9,24 +9,26 @@ const Navbar = () => {
             SafetyOnRoads
           </Link>
         </div>
-        <div className="hidden sm:block sm:ml-6">
-          <div className="flex space-x-4">
-            <Link
-              href="/upload"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Upload
-            </Link>
+        <div className="flex gap-2">
+          <div className="hidden sm:block">
+            <div className="flex">
+              <Link
+                href="/upload"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Upload Video
+              </Link>
+            </div>
           </div>
-        </div>
-        <div className="hidden sm:block sm:ml-6">
-          <div className="flex space-x-4">
-            <Link
-              href="/collection"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Videos
-            </Link>
+          <div className="hidden sm:block">
+            <div className="flex">
+              <Link
+                href="/collection"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Videos
+              </Link>
+            </div>
           </div>
         </div>
       </div>
