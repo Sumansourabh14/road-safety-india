@@ -14,8 +14,10 @@ export default function Home() {
             over the world.
           </p>
           <p>We need to change this.</p>
-          <h2 className="text-red-500">How?</h2>
-          <p>By building road awareness</p>
+          <p className="text-red-500">How?</p>
+          <p>
+            <strong>1st step:</strong> Build road awareness
+          </p>
           <hr />
           <p>
             Upload any dashcam video/CCTV footage about anything unusual
