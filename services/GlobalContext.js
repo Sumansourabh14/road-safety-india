@@ -26,6 +26,23 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
+  const getVideo = async (documentId) => {
+    try {
+      setLoading(true);
+      const res = await databases.getDocument(
+        process.env.NEXT_PUBLIC_DATABASE_ID,
+        process.env.NEXT_PUBLIC_VIDEOS_COLLECTION_ID,
+        documentId
+      );
+
+      setLoading(false);
+      return res;
+    } catch (error) {
+      // console.error(error);
+      setLoading(false);
+    }
+  };
+
   const uploadVideo = async (body, videoUrl, location) => {
     try {
       const res = await databases.createDocument(
@@ -42,7 +59,9 @@ export const GlobalContextProvider = ({ children }) => {
   };
 
   return (
-    <GlobalContext.Provider value={{ loading, getVideos, uploadVideo }}>
+    <GlobalContext.Provider
+      value={{ loading, getVideo, getVideos, uploadVideo }}
+    >
       {children}
     </GlobalContext.Provider>
   );

@@ -1,14 +1,44 @@
-const VideoCard = ({ id, body, url }) => {
+import Link from "next/link";
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+
+const VideoCard = ({ id, body, url, location }) => {
   return (
-    <div key={id} className="flex flex-col gap-4">
-      {!!url && (
-        <video width="320" height="240" preload="none">
-          <source src={url} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+    <Card key={id} className="flex flex-col">
+      <CardHeader>
+        <Link href={`/collection/${id}`}>
+          {!!url && (
+            <video preload="auto" className="rounded-sm">
+              <source src={url} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
+        </Link>
+      </CardHeader>
+      <CardContent>
+        <p
+          style={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitLineClamp: "3",
+            WebkitBoxOrient: "vertical",
+          }}
+          className="text-md"
+        >
+          {body}
+        </p>
+      </CardContent>
+      {!!location && (
+        <CardFooter>
+          <div className="flex items-center gap-2">
+            <FontAwesomeIcon icon={faLocationDot} />
+            <p>{location}</p>
+          </div>
+        </CardFooter>
       )}
-      <p>{body}</p>
-    </div>
+    </Card>
   );
 };
 
