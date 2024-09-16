@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 
 const Upload = () => {
+  const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [file, setFile] = useState("");
   const [location, setLocation] = useState("");
@@ -25,7 +26,7 @@ const Upload = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    uploadVideo(body, videoUrl, location);
+    uploadVideo(title, body, videoUrl, location);
   };
 
   const uploadVideoToAppwrite = async () => {
@@ -48,6 +49,13 @@ const Upload = () => {
         <div className="my-4 px-8">
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-8 max-w-[680px] items-center mx-auto">
+              <Input
+                type="text"
+                placeholder="Title of the video"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
               <div>
                 <Textarea
                   placeholder="Type your body here"
@@ -90,7 +98,7 @@ const Upload = () => {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
               />
-              <Button type="submit" disabled={!videoSrc || body.length === 0}>
+              <Button type="submit" disabled={!videoSrc || title.length === 0}>
                 Submit
               </Button>
             </div>

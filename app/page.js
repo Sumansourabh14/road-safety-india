@@ -3,9 +3,13 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] justify-items-center min-h-screen p-8 pb-20 gap-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1 className="text-8xl font-bold">Safety on Roads</h1>
+    <div className="p-8 py-20 gap-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start max-w-[1200px] mx-auto py-10 min-h-screen">
+        <h1 className="text-7xl font-bold">Safety on Roads</h1>
+        <h2 className="text-3xl font-medium">
+          Do not follow traffic rules to avoid fines, follow them to save your
+          own life.
+        </h2>
         <section className="flex flex-col gap-4 max-w-[600px]">
           <p>
             In India, about <span className="text-red-500">80,000</span> people
@@ -28,13 +32,8 @@ export default function Home() {
             corruption by traffic personnel, false allegation on road, etc.
           </p>
         </section>
-        <Button asChild>
-          <Link
-            href={`/upload`}
-            className="text-3xl px-16 py-8 hover:bg-gray-950"
-          >
-            Upload Video
-          </Link>
+        <Button asChild className="text-2xl px-16 py-8 hover:bg-gray-950">
+          <Link href={`/upload`}>Upload Video</Link>
         </Button>
       </main>
     </div>
