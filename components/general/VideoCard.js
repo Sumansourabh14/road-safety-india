@@ -1,9 +1,15 @@
 import Link from "next/link";
-import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
-const VideoCard = ({ id, body, url, location }) => {
+const VideoCard = ({ id, title, body, url, location }) => {
   return (
     <Card key={id} className="flex flex-col">
       <CardHeader>
@@ -15,6 +21,7 @@ const VideoCard = ({ id, body, url, location }) => {
             </video>
           )}
         </Link>
+        <CardTitle className="pt-2 text-lg">{title}</CardTitle>
       </CardHeader>
       <CardContent>
         <p

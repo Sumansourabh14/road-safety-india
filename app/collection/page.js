@@ -47,6 +47,7 @@ const Collection = () => {
               <VideoCard
                 key={item.$id}
                 id={item.$id}
+                title={item.title}
                 body={item.text}
                 url={item.videoUrl}
                 location={item.location}

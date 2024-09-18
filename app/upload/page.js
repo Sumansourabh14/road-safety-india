@@ -53,7 +53,7 @@ const Upload = () => {
 
   return (
     <div className="p:8 md:p-24 font-[family-name:var(--font-geist-sans)]">
-      <main>
+      <main className="py-8">
         <h1 className="text-5xl text-center font-bold">Upload Video</h1>
         <div className="my-4 px-8">
           <form onSubmit={handleSubmit}>
