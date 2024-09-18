@@ -6,7 +6,8 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { roadIncidents } from "@/data/content/inputData";
 import { GlobalContext } from "@/services/GlobalContext";
 import { uploadVideoToBackend } from "@/utils/backendFunctions";
-import { useContext, useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
+import { useContext, useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 
 const Upload = () => {
@@ -17,6 +18,7 @@ const Upload = () => {
   const [incidentType, setIncidentType] = useState([]);
   const [videoUrl, setVideoUrl] = useState("");
   const [videoSrc, setVideoSrc] = useState("");
+  const [submitLoading, setSubmitLoading] = useState(false);
 
   const { uploadVideo } = useContext(GlobalContext);
 
@@ -26,24 +28,28 @@ const Upload = () => {
     setFile(file);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    uploadVideo(title, body, videoUrl, location, incidentType);
-  };
-
   const uploadVideoToAppwrite = async () => {
     const url = await uploadVideoToBackend(file);
-    setVideoUrl(url);
+    return url;
   };
 
-  useEffect(() => {
+  const handleSubmit = async (e) => {
+    setSubmitLoading(true);
+    e.preventDefault();
+
     if (!file) {
+      setSubmitLoading(false);
       return;
     }
+    const URL = await uploadVideoToAppwrite();
+    setVideoUrl(URL);
 
-    uploadVideoToAppwrite();
-  }, [file]);
+    if (!!URL) {
+      const res = await uploadVideo(title, body, URL, location, incidentType);
+      setSubmitLoading(false);
+    }
+    setSubmitLoading(false);
+  };
 
   return (
     <div className="p:8 md:p-24 font-[family-name:var(--font-geist-sans)]">
@@ -125,8 +131,15 @@ const Upload = () => {
                   </ToggleGroup>
                 </div>
               )}
-              <Button type="submit" disabled={!videoSrc || title.length === 0}>
-                Submit
+              <Button
+                type="submit"
+                disabled={!videoSrc || title.length === 0 || submitLoading}
+                className="py-6 text-md px-8"
+              >
+                {submitLoading && (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Upload
               </Button>
             </div>
           </form>
