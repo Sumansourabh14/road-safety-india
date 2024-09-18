@@ -2,6 +2,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { roadIncidents } from "@/data/content/inputData";
 import { GlobalContext } from "@/services/GlobalContext";
 import { uploadVideoToBackend } from "@/utils/backendFunctions";
 import { useContext, useEffect, useState } from "react";
@@ -12,6 +14,7 @@ const Upload = () => {
   const [body, setBody] = useState("");
   const [file, setFile] = useState("");
   const [location, setLocation] = useState("");
+  const [incidentType, setIncidentType] = useState([]);
   const [videoUrl, setVideoUrl] = useState("");
   const [videoSrc, setVideoSrc] = useState("");
 
@@ -26,7 +29,7 @@ const Upload = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    uploadVideo(title, body, videoUrl, location);
+    uploadVideo(title, body, videoUrl, location, incidentType);
   };
 
   const uploadVideoToAppwrite = async () => {
@@ -43,7 +46,7 @@ const Upload = () => {
   }, [file]);
 
   return (
-    <div className="p-32 font-[family-name:var(--font-geist-sans)]">
+    <div className="p:8 md:p-24 font-[family-name:var(--font-geist-sans)]">
       <main>
         <h1 className="text-5xl text-center font-bold">Upload Video</h1>
         <div className="my-4 px-8">
@@ -92,12 +95,36 @@ const Upload = () => {
                   )}
                 </div>
               </FileUploader>
-              <Input
-                type="text"
-                placeholder="Location in the video"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-              />
+
+              {!!file && (
+                <div className="flex flex-col gap-4 items-center">
+                  <Input
+                    type="text"
+                    placeholder="Location in the video"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                  />
+                  <p className="text-black text-md">Type of incident</p>
+                  <p className="text-sm text-muted-foreground mt-[-10px]">
+                    You can select more than one
+                  </p>
+                  <ToggleGroup
+                    variant="outline"
+                    type="multiple"
+                    className="flex flex-wrap"
+                    value={incidentType}
+                    onValueChange={(value) => {
+                      setIncidentType(value);
+                    }}
+                  >
+                    {roadIncidents.map((type) => (
+                      <ToggleGroupItem key={type.value} value={type.value}>
+                        {type.title}
+                      </ToggleGroupItem>
+                    ))}
+                  </ToggleGroup>
+                </div>
+              )}
               <Button type="submit" disabled={!videoSrc || title.length === 0}>
                 Submit
               </Button>
