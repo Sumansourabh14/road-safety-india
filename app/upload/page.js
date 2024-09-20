@@ -3,11 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { siteTitle } from "@/data/content/basicData";
 import { roadIncidents } from "@/data/content/inputData";
 import { GlobalContext } from "@/services/GlobalContext";
 import { uploadVideoToBackend } from "@/utils/backendFunctions";
 import { Loader2 } from "lucide-react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 
 const Upload = () => {
@@ -50,6 +51,10 @@ const Upload = () => {
     }
     setSubmitLoading(false);
   };
+
+  useEffect(() => {
+    document.title = `Upload Video | ${siteTitle}`;
+  }, []);
 
   return (
     <div className="p:8 md:p-24 font-[family-name:var(--font-geist-sans)]">

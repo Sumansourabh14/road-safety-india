@@ -1,6 +1,7 @@
 "use client";
 import VideoCard from "@/components/general/VideoCard";
 import { Skeleton } from "@/components/ui/skeleton";
+import { siteTitle } from "@/data/content/basicData";
 import { GlobalContext } from "@/services/GlobalContext";
 import { useContext, useEffect, useState } from "react";
 
@@ -18,11 +19,8 @@ const Collection = () => {
 
   useEffect(() => {
     listVideos();
+    document.title = `Videos | ${siteTitle}`;
   }, []);
-
-  // useEffect(() => {
-  //   console.log(data);
-  // }, [data]);
 
   return (
     <div className="py-16 px-8 font-[family-name:var(--font-geist-sans)]">

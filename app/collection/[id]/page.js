@@ -1,5 +1,6 @@
 "use client";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { siteTitle } from "@/data/content/basicData";
 import { GlobalContext } from "@/services/GlobalContext";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -23,6 +24,10 @@ const VideoDetails = () => {
   useEffect(() => {
     listVideo(id);
   }, [id]);
+
+  useEffect(() => {
+    document.title = `${data.title} | ${siteTitle}`;
+  }, [data]);
 
   return (
     <div className="py-16 px-8 font-[family-name:var(--font-geist-sans)]">
