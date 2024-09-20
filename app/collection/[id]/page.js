@@ -1,6 +1,7 @@
 "use client";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { siteTitle } from "@/data/content/basicData";
+import { roadIncidents } from "@/data/content/inputData";
 import { GlobalContext } from "@/services/GlobalContext";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,6 +20,11 @@ const VideoDetails = () => {
     if (!!res) {
       setData(res);
     }
+  };
+
+  const getVideoType = (type) => {
+    const videoType = roadIncidents.find((item) => item.value === type);
+    return videoType.title;
   };
 
   useEffect(() => {
@@ -47,7 +53,7 @@ const VideoDetails = () => {
               >
                 {data.type.map((type) => (
                   <ToggleGroupItem key={type} value={type}>
-                    {type}
+                    {getVideoType(type)}
                   </ToggleGroupItem>
                 ))}
               </ToggleGroup>
