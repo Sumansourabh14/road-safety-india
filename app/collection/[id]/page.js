@@ -7,6 +7,7 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
+import Player from "next-video/player";
 
 const VideoDetails = () => {
   const [data, setData] = useState([]);
@@ -65,12 +66,7 @@ const VideoDetails = () => {
               </div>
             )}
             <div className="max-w-[700px] flex flex-col gap-6">
-              {!!data.videoUrl && (
-                <video preload="auto" controls className="rounded-sm">
-                  <source src={data.videoUrl} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              )}
+              {!!data.videoUrl && <Player src={data.videoUrl} />}
               <p>{data.text}</p>
             </div>
           </div>
