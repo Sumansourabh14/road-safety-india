@@ -1,13 +1,14 @@
 "use client";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { siteTitle } from "@/data/content/basicData";
-import { roadIncidents } from "@/data/content/inputData";
 import { GlobalContext } from "@/services/GlobalContext";
+import { getVideoType } from "@/utils/utilFunctions";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Player from "next-video/player";
 import { useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
-import Player from "next-video/player";
 
 const VideoDetails = () => {
   const [data, setData] = useState([]);
@@ -21,11 +22,6 @@ const VideoDetails = () => {
     if (!!res) {
       setData(res);
     }
-  };
-
-  const getVideoType = (type) => {
-    const videoType = roadIncidents.find((item) => item.value === type);
-    return videoType.title;
   };
 
   useEffect(() => {
@@ -42,7 +38,13 @@ const VideoDetails = () => {
         <h1 className="text-5xl font-medium">{!!data && data.title}</h1>
 
         {loading ? (
-          <p>Loading...</p>
+          <div className="flex flex-col space-y-3">
+            <Skeleton className="h-[400px] w-[600px] rounded-xl" />
+            <div className="space-y-2">
+              <Skeleton className="h-8 w-[350px]" />
+              <Skeleton className="h-8 w-[350px]" />
+            </div>
+          </div>
         ) : (
           <div className="max-w-[800px] flex flex-col gap-4">
             {data?.type?.length > 0 && (

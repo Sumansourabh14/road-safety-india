@@ -1,4 +1,5 @@
 "use client";
+import BigLinkBtn from "@/components/buttons/BigLinkBtn";
 import VideoCard from "@/components/general/VideoCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { siteTitle } from "@/data/content/basicData";
@@ -49,11 +50,15 @@ const Collection = () => {
                 body={item.text}
                 url={item.videoUrl}
                 location={item.location}
+                incidentType={item.type}
               />
             ))}
           </section>
         ) : (
-          <p>No data available</p>
+          <div className="flex flex-col gap-4">
+            <p>No data available</p>
+            <BigLinkBtn title={"Upload Video"} url={"/upload"} />
+          </div>
         )}
       </main>
     </div>
