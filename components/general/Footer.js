@@ -1,3 +1,5 @@
+import { siteTitle, socialLinks } from "@/data/content/basicData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
 const Footer = () => {
@@ -6,7 +8,7 @@ const Footer = () => {
       <div className="flex items-center justify-between py-4 px-4">
         <div className="flex-shrink-0">
           <Link href="/" className="text-white text-xl font-bold">
-            SafetyOnRoads
+            {siteTitle}
           </Link>
         </div>
         <div className="hidden sm:block sm:ml-6">
@@ -19,9 +21,18 @@ const Footer = () => {
             </Link>
           </div>
         </div>
+        <div className="hidden sm:block sm:ml-6">
+          <div className="flex space-x-4">
+            {socialLinks.map((social) => (
+              <Link key={social.platform} href={social.url} target="_blank">
+                <FontAwesomeIcon icon={social.icon} className="text-white" />
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
       <p className="text-sm text-gray-400 text-center pt-8">
-        &copy; <span id="year">{new Date().getFullYear()}</span> SafetyOnRoads.
+        &copy; <span id="year">{new Date().getFullYear()}</span> {siteTitle}.
         All rights reserved.
       </p>
     </footer>

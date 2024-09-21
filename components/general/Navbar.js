@@ -1,3 +1,4 @@
+import { siteTitle } from "@/data/content/basicData";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -6,7 +7,7 @@ const Navbar = () => {
       <div className="flex items-center justify-between py-4 px-4">
         <div className="flex-shrink-0">
           <Link href="/" className="text-white text-xl font-bold">
-            SafetyOnRoads
+            {siteTitle}
           </Link>
         </div>
         <div className="flex gap-2">
