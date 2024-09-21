@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { siteTitle } from "@/data/content/basicData";
 import Link from "next/link";
 
 export default function Home() {
@@ -7,10 +6,10 @@ export default function Home() {
     <div className="p-8 py-20 gap-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start max-w-[1200px] mx-auto py-10 min-h-screen">
         <h1 className="text-7xl font-bold">You are the problem!</h1>
-        <h1 className="text-3xl font-medium">
+        <h2 className="text-3xl font-medium">
           Do not follow traffic rules to avoid fines, follow them to save your
           own life.
-        </h1>
+        </h2>
         <section className="flex flex-col gap-4 max-w-[600px]">
           <p>
             In India, about{" "}

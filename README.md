@@ -9,3 +9,7 @@ Do not follow traffic rules to avoid fines, follow them to save your own life.
 [Upload](https://road-safety-india.vercel.app/upload) any dashcam video/CCTV footage. The video will appear on the [collections page](https://road-safety-india.vercel.app/collection).
 
 This video will also be used by [wtfindianroads](https://x.com/wtfindianroads) X account for road safety awareness.
+
+## Testing
+
+- [Setting up Jest with Next.js](https://nextjs.org/docs/app/building-your-application/testing/jest)
