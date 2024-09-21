@@ -7,6 +7,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Analytics } from "@vercel/analytics/react";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 config.autoAddCss = false;
 
 const geistSans = localFont({
@@ -36,6 +37,7 @@ export default function RootLayout({ children }) {
           {children}
           <Analytics />
           <Footer />
+          <Toaster />
         </body>
       </html>
     </GlobalContextProvider>

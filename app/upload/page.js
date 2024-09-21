@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { siteTitle } from "@/data/content/basicData";
 import { roadIncidents } from "@/data/content/inputData";
+import { useToast } from "@/hooks/use-toast";
 import { GlobalContext } from "@/services/GlobalContext";
 import { uploadVideoToBackend } from "@/utils/backendFunctions";
 import { Loader2 } from "lucide-react";
@@ -21,6 +22,7 @@ const Upload = () => {
   const [videoSrc, setVideoSrc] = useState("");
   const [submitLoading, setSubmitLoading] = useState(false);
 
+  const { toast } = useToast();
   const { uploadVideo } = useContext(GlobalContext);
 
   const handleFileChange = (file) => {
@@ -57,7 +59,7 @@ const Upload = () => {
   }, []);
 
   return (
-    <div className="py-20 md:p-24 font-[family-name:var(--font-geist-sans)]">
+    <div className="py-20 font-[family-name:var(--font-geist-sans)]">
       <main className="py-8">
         <h1 className="text-5xl text-center font-bold">Upload Video</h1>
         <div className="my-8 px-8">
@@ -65,14 +67,14 @@ const Upload = () => {
             <div className="flex flex-col gap-8 max-w-[680px] items-center mx-auto">
               <Input
                 type="text"
-                placeholder="Title of the video"
+                placeholder="Title of the video *"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
               />
               <div>
                 <Textarea
-                  placeholder="Type your body here"
+                  placeholder="Body of the video"
                   value={body}
                   onChange={(e) => setBody(e.target.value)}
                   required
@@ -87,6 +89,22 @@ const Upload = () => {
                 handleChange={handleFileChange}
                 value={file}
                 types={["mp4"]}
+                maxSize={50}
+                onSizeError={(file) => {
+                  toast({
+                    variant: "destructive",
+                    title: "File size exceeded!",
+                    description:
+                      "Please upload a video of size less than 50 Mb",
+                  });
+                }}
+                onTypeError={(err) => {
+                  toast({
+                    variant: "destructive",
+                    title: "Invalid video type",
+                    description: err,
+                  });
+                }}
               >
                 <div className="w-full max-w-lg p-6 border-2 border-dashed rounded-lg transition-colors border-gray-300">
                   {!videoSrc ? (
