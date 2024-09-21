@@ -33,9 +33,9 @@ const VideoDetails = () => {
   }, [data]);
 
   return (
-    <div className="py-16 px-8 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 items-center sm:items-start max-w-[1200px] mx-auto py-10">
-        <h1 className="text-5xl font-medium">{!!data && data.title}</h1>
+    <div className="py-20 px-8 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-8 items-start max-w-[1200px] mx-auto py-10">
+        <h1 className="text-5xl font-semibold">{!!data && data.title}</h1>
 
         {loading ? (
           <div className="flex flex-col space-y-3">
@@ -46,30 +46,32 @@ const VideoDetails = () => {
             </div>
           </div>
         ) : (
-          <div className="max-w-[800px] flex flex-col gap-4">
-            {data?.type?.length > 0 && (
-              <ToggleGroup
-                variant="outline"
-                type="multiple"
-                className="flex flex-wrap justify-start"
-                disabled
-              >
-                {data.type.map((type) => (
-                  <ToggleGroupItem key={type} value={type}>
-                    {getVideoType(type)}
-                  </ToggleGroupItem>
-                ))}
-              </ToggleGroup>
-            )}
+          <div className="flex flex-col gap-4">
             {!!data.location && (
               <div className="flex items-center gap-2">
                 <FontAwesomeIcon icon={faLocationDot} />
                 <p>{data.location}</p>
               </div>
             )}
-            <div className="max-w-[700px] flex flex-col gap-6">
+            <div className="flex flex-col md:flex-row gap-6">
               {!!data.videoUrl && <Player src={data.videoUrl} />}
-              <p>{data.text}</p>
+              <div className="max-w-[500px] flex flex-col gap-4">
+                {data?.type?.length > 0 && (
+                  <ToggleGroup
+                    variant="outline"
+                    type="multiple"
+                    className="flex flex-wrap justify-start"
+                    disabled
+                  >
+                    {data.type.map((type) => (
+                      <ToggleGroupItem key={type} value={type}>
+                        {getVideoType(type)}
+                      </ToggleGroupItem>
+                    ))}
+                  </ToggleGroup>
+                )}
+                <p>{data.text}</p>
+              </div>
             </div>
           </div>
         )}

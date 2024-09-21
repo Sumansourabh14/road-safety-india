@@ -57,10 +57,10 @@ const Upload = () => {
   }, []);
 
   return (
-    <div className="p:8 md:p-24 font-[family-name:var(--font-geist-sans)]">
+    <div className="py-20 md:p-24 font-[family-name:var(--font-geist-sans)]">
       <main className="py-8">
         <h1 className="text-5xl text-center font-bold">Upload Video</h1>
-        <div className="my-4 px-8">
+        <div className="my-8 px-8">
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-8 max-w-[680px] items-center mx-auto">
               <Input
