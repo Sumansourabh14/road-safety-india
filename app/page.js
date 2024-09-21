@@ -6,15 +6,22 @@ export default function Home() {
   return (
     <div className="p-8 py-20 gap-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start max-w-[1200px] mx-auto py-10 min-h-screen">
-        <h1 className="text-7xl font-bold">{siteTitle}</h1>
-        <h2 className="text-3xl font-medium">
+        <h1 className="text-7xl font-bold">You are the problem!</h1>
+        <h1 className="text-3xl font-medium">
           Do not follow traffic rules to avoid fines, follow them to save your
           own life.
-        </h2>
+        </h1>
         <section className="flex flex-col gap-4 max-w-[600px]">
           <p>
-            In India, about <span className="text-red-500">80,000</span> people
-            are killed in road crashes every year, which is{" "}
+            In India, about{" "}
+            <Link
+              href={"https://morth.nic.in/about-road-safety"}
+              target="_blank"
+              className="text-red-500 underline"
+            >
+              80,000
+            </Link>{" "}
+            people are killed in road crashes every year, which is{" "}
             <span className="text-red-500">13%</span> of the total fatality all
             over the world.
           </p>

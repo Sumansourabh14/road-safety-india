@@ -1,12 +1,12 @@
-import localFont from "next/font/local";
-import "./globals.css";
-import { GlobalContextProvider } from "@/services/GlobalContext";
-import Navbar from "@/components/general/Navbar";
 import Footer from "@/components/general/Footer";
-import { Analytics } from "@vercel/analytics/react";
+import Navbar from "@/components/general/Navbar";
+import { siteTitle } from "@/data/content/basicData";
+import { GlobalContextProvider } from "@/services/GlobalContext";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { siteTitle } from "@/data/content/basicData";
+import { Analytics } from "@vercel/analytics/react";
+import localFont from "next/font/local";
+import "./globals.css";
 config.autoAddCss = false;
 
 const geistSans = localFont({

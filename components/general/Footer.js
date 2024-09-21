@@ -1,6 +1,7 @@
 import { siteTitle, socialLinks } from "@/data/content/basicData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import BigSiteTitle from "./BigSiteTitle";
 
 const Footer = () => {
   return (
@@ -35,6 +36,7 @@ const Footer = () => {
         &copy; <span id="year">{new Date().getFullYear()}</span> {siteTitle}.
         All rights reserved.
       </p>
+      <BigSiteTitle />
     </footer>
   );
 };
